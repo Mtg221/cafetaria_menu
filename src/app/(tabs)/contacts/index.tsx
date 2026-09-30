@@ -7,12 +7,12 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { Link } from "expo-router";
 import { CONTACTS } from "@/data/contacts";
 import { ContactRow } from "@/components/ContactRow";
 
 export default function Contacts() {
   const [query, setQuery] = useState("");
-  const [selectedId, setSelectedId] = useState<string | null>(null);
   const filtered = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     return CONTACTS.filter((contact) =>
@@ -25,12 +25,14 @@ export default function Contacts() {
       data={filtered}
       keyExtractor={(contact) => contact.id}
       renderItem={({ item }) => (
-        <Pressable
-          onPress={() => setSelectedId(item.id)}
-          style={item.id === selectedId && styles.rowSelected}
+        <Link
+          href={{ pathname: "/contacts/[id]", params: { id: item.id } } as any}
+          asChild
         >
-          <ContactRow contact={item} />
-        </Pressable>
+          <Pressable>
+            <ContactRow contact={item} />
+          </Pressable>
+        </Link>
       )}
       ListHeaderComponent={
         <View>
@@ -76,11 +78,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingHorizontal: 14,
     marginBottom: 12,
-  },
-  rowSelected: {
-    backgroundColor: "#dbeafe",
-    borderRadius: 8,
-    paddingHorizontal: 8,
   },
   separator: { height: 1, backgroundColor: "#e5e5e5" },
   empty: { textAlign: "center", color: "#888", paddingVertical: 32 },
