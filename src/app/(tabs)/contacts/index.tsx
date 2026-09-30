@@ -37,8 +37,15 @@ export default function Contacts() {
       ListHeaderComponent={
         <View>
           <View style={styles.headerRow}>
-            <Text style={styles.h1}>Contacts</Text>
-            <Text style={styles.count}>({filtered.length})</Text>
+            <View style={styles.titleGroup}>
+              <Text style={styles.h1}>Contacts</Text>
+              <Text style={styles.count}>({filtered.length})</Text>
+            </View>
+            <Link href={"/new-message" as any} asChild>
+              <Pressable>
+                <Text style={styles.action}>New</Text>
+              </Pressable>
+            </Link>
           </View>
           <TextInput
             style={styles.search}
@@ -69,8 +76,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingBottom: 8,
   },
+  titleGroup: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
   h1: { fontSize: 22, fontWeight: "bold", color: "#1a5276" },
   count: { color: "#888" },
+  action: { color: "#1a5276", fontWeight: "600" },
   search: {
     height: 40,
     borderWidth: 1,
