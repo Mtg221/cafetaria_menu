@@ -1,43 +1,14 @@
-import { Image } from "expo-image";
 import { useMemo, useState } from "react";
 import {
-    FlatList,
-    Pressable,
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
-
-import { CONTACTS } from "../data/contacts";
-
-type Contact = (typeof CONTACTS)[number];
-
-function ContactRow({
-  contact,
-  selected,
-  onPress,
-}: {
-  contact: Contact;
-  selected: boolean;
-  onPress: () => void;
-}) {
-  return (
-    <Pressable
-      onPress={onPress}
-      style={[styles.row, selected && styles.rowSelected]}
-    >
-      <Image
-        source={`https://i.pravatar.cc/100?u=${contact.id}`}
-        style={styles.avatar}
-      />
-      <View style={styles.rowText}>
-        <Text style={styles.name}>{contact.name}</Text>
-        <Text style={styles.program}>{contact.program}</Text>
-      </View>
-    </Pressable>
-  );
-}
+import { CONTACTS } from "@/data/contacts";
+import { ContactRow } from "@/components/ContactRow";
 
 export default function Contacts() {
   const [query, setQuery] = useState("");
@@ -45,7 +16,7 @@ export default function Contacts() {
   const filtered = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     return CONTACTS.filter((contact) =>
-      contact.name.toLowerCase().includes(normalizedQuery),
+      contact.name.toLowerCase().includes(normalizedQuery)
     );
   }, [query]);
 
@@ -54,11 +25,12 @@ export default function Contacts() {
       data={filtered}
       keyExtractor={(contact) => contact.id}
       renderItem={({ item }) => (
-        <ContactRow
-          contact={item}
-          selected={item.id === selectedId}
+        <Pressable
           onPress={() => setSelectedId(item.id)}
-        />
+          style={item.id === selectedId && styles.rowSelected}
+        >
+          <ContactRow contact={item} />
+        </Pressable>
       )}
       ListHeaderComponent={
         <View>
@@ -105,21 +77,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     marginBottom: 12,
   },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-    paddingVertical: 10,
-  },
   rowSelected: {
     backgroundColor: "#dbeafe",
     borderRadius: 8,
     paddingHorizontal: 8,
   },
-  avatar: { width: 44, height: 44, borderRadius: 22 },
-  rowText: { flex: 1 },
-  name: { fontSize: 16, fontWeight: "600" },
-  program: { fontSize: 13, color: "#666" },
   separator: { height: 1, backgroundColor: "#e5e5e5" },
   empty: { textAlign: "center", color: "#888", paddingVertical: 32 },
 });
