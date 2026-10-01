@@ -23,7 +23,7 @@ export const CAFETERIA_ITEMS: MenuItem[] = [
     ],
     imageEmoji: '🍲',
     imageUrl: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80',
-    imageSource: require('./pictures/thieboudieunne.jpeg')
+    imageSource: require('../../assets/images/menu/thieboudieunne.jpeg')
   },
   {
     id: 'sen-102',
@@ -46,7 +46,7 @@ export const CAFETERIA_ITEMS: MenuItem[] = [
     ],
     imageEmoji: '🍗',
     imageUrl: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=800&q=80',
-    imageSource: require('./pictures/yassapoulet.jpeg')
+    imageSource: require('../../assets/images/menu/yassapoulet.jpeg')
   },
   {
     id: 'sen-103',
@@ -68,7 +68,7 @@ export const CAFETERIA_ITEMS: MenuItem[] = [
     ],
     imageEmoji: '🥘',
     imageUrl: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80',
-    imageSource: require('./pictures/maffe.jpeg')
+    imageSource: require('../../assets/images/menu/maffe.jpeg')
   },
   {
     id: 'sen-104',
@@ -90,7 +90,7 @@ export const CAFETERIA_ITEMS: MenuItem[] = [
     ],
     imageEmoji: '🥟',
     imageUrl: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80',
-    imageSource: require('./pictures/fataya.jpeg')
+    imageSource: require('../../assets/images/menu/fataya.jpeg')
   },
   {
     id: 'sen-105',
@@ -111,7 +111,7 @@ export const CAFETERIA_ITEMS: MenuItem[] = [
     ],
     imageEmoji: '🥐',
     imageUrl: 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80',
-    imageSource: require('./pictures/fataya.jpeg')
+    imageSource: require('../../assets/images/menu/fataya.jpeg')
   },
   {
     id: 'sen-106',
@@ -133,7 +133,7 @@ export const CAFETERIA_ITEMS: MenuItem[] = [
     ],
     imageEmoji: '🍹',
     imageUrl: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80',
-    imageSource: require('./pictures/bissap.jpeg')
+    imageSource: require('../../assets/images/menu/bissap.jpeg')
   },
   {
     id: 'sen-107',
@@ -154,7 +154,7 @@ export const CAFETERIA_ITEMS: MenuItem[] = [
     ],
     imageEmoji: '🥛',
     imageUrl: 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=800&q=80',
-    imageSource: require('./pictures/bouye.jpeg')
+    imageSource: require('../../assets/images/menu/bouye.jpeg')
   },
   {
     id: 'sen-108',
@@ -175,7 +175,7 @@ export const CAFETERIA_ITEMS: MenuItem[] = [
     ],
     imageEmoji: '🍨',
     imageUrl: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=800&q=80',
-    imageSource: require('./pictures/thiakry.jpeg')
+    imageSource: require('../../assets/images/menu/thiakry.jpeg')
   }
 ];
 

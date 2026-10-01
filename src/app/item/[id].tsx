@@ -23,6 +23,7 @@ export default function ItemDetailScreen() {
   const [quantity, setQuantity] = useState(1);
   const [showNutritionModal, setShowNutritionModal] = useState(false);
   const [addedToast, setAddedToast] = useState(false);
+  const [isImagePreviewOpen, setIsImagePreviewOpen] = useState(false);
 
   // REQUIREMENT 8: A not-found state when an identifier matches nothing
   if (!item) {
@@ -67,7 +68,11 @@ export default function ItemDetailScreen() {
 
       <ScrollView contentContainerStyle={styles.content}>
         {/* Header Hero Graphic */}
-        <View style={styles.heroContainer}>
+        <TouchableOpacity 
+          activeOpacity={0.9} 
+          style={styles.heroContainer}
+          onPress={() => setIsImagePreviewOpen(true)}
+        >
           <Image
             source={item.imageSource}
             style={styles.heroImage}
@@ -79,7 +84,10 @@ export default function ItemDetailScreen() {
               <Text style={styles.heroSpecialBadgeText}>CAMPUS DEAL</Text>
             </View>
           )}
-        </View>
+          <View style={styles.tapToZoomHint}>
+            <Text style={styles.tapToZoomText}>🔍 Tap image to expand</Text>
+          </View>
+        </TouchableOpacity>
 
         {/* Title & Category */}
         <View style={styles.headerInfo}>
@@ -182,6 +190,38 @@ export default function ItemDetailScreen() {
           </Text>
         </TouchableOpacity>
       </View>
+
+      {/* Fullscreen Image Preview Modal */}
+      <Modal
+        visible={isImagePreviewOpen}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setIsImagePreviewOpen(false)}
+      >
+        <View style={styles.fullScreenImageOverlay}>
+          <SafeAreaView style={styles.fullScreenSafeArea}>
+            <TouchableOpacity
+              style={styles.closePreviewBtn}
+              onPress={() => setIsImagePreviewOpen(false)}
+            >
+              <Text style={styles.closePreviewText}>✕ Close</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              activeOpacity={1}
+              style={styles.fullScreenImageContainer}
+              onPress={() => setIsImagePreviewOpen(false)}
+            >
+              <Image
+                source={item.imageSource}
+                style={styles.fullScreenImage}
+                contentFit="contain"
+              />
+              <Text style={styles.fullScreenItemName}>{item.name}</Text>
+            </TouchableOpacity>
+          </SafeAreaView>
+        </View>
+      </Modal>
 
       {/* EXTENSION REQUIREMENT: Second Level of Detail Modal */}
       <Modal
@@ -615,5 +655,55 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: '700',
     fontSize: 15
+  },
+
+  // Image Interactivity Styles
+  tapToZoomHint: {
+    position: 'absolute',
+    bottom: 12,
+    right: 12,
+    backgroundColor: 'rgba(15, 23, 42, 0.75)',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 12
+  },
+  tapToZoomText: {
+    color: '#FFFFFF',
+    fontSize: 11,
+    fontWeight: '600'
+  },
+  fullScreenImageOverlay: {
+    flex: 1,
+    backgroundColor: '#000000'
+  },
+  fullScreenSafeArea: {
+    flex: 1
+  },
+  closePreviewBtn: {
+    alignSelf: 'flex-end',
+    padding: 16,
+    zIndex: 10
+  },
+  closePreviewText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '700'
+  },
+  fullScreenImageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16
+  },
+  fullScreenImage: {
+    width: '100%',
+    height: '80%'
+  },
+  fullScreenItemName: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: '700',
+    marginTop: 16,
+    textAlign: 'center'
   }
 });
